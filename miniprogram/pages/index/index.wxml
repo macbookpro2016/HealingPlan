@@ -1,0 +1,27 @@
+<view class="index-container">
+  <!-- 治愈天数水球（右上角固定定位） -->
+  <view class="healing-days">
+    <canvas type="2d" id="waterBall"></canvas> <!-- 动态水球画布 -->
+    <text class="days-number">10</text> <!-- 治愈天数数字 -->
+  </view>
+
+  <!-- 开发者寄语区域 -->
+  <view class="developer-message">
+    <text class="message-title">致正在治愈的你：</text>
+    <text class="message-content">
+      每一次记录都是与自己和解的开始，  
+      每一次打卡都是向光生长的印记，  
+      我们始终在这里陪伴你度过每个当下。
+    </text>
+  </view>
+
+  <!-- 功能快捷入口（下移至寄语下方） -->
+  <view class="function-buttons">
+    <!-- 保持原有四个功能按钮不变 -->
+    <navigator url="/pages/diary/diary" class="button">
+      <icon type="edit" size="40" color="#FF6B6B"></icon>
+      <text>心情日记</text>
+    </navigator>
+    <!-- 其他按钮代码同上 -->
+  </view>
+</view>

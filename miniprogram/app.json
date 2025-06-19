@@ -1,0 +1,52 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/diary/diary",
+    "pages/punchCard/punchCard",
+    "pages/community/community",
+    "pages/recommend/recommend"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#f4f4f4",
+    "navigationBarTitleText": "分手疗愈",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#999",
+    "selectedColor": "#FF6B6B",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/home_active.png"
+      },
+      {
+        "pagePath": "pages/diary/diary",
+        "text": "心情日记",
+        "iconPath": "images/diary.png",
+        "selectedIconPath": "images/diary_active.png"
+      },
+      {
+        "pagePath": "pages/punchCard/punchCard",
+        "text": "打卡",
+        "iconPath": "images/punch.png",
+        "selectedIconPath": "images/punch_active.png"
+      },
+      {
+        "pagePath": "pages/community/community",
+        "text": "社区",
+        "iconPath": "images/community.png",
+        "selectedIconPath": "images/community_active.png"
+      },
+      {
+        "pagePath": "pages/recommend/recommend",
+        "text": "建议",
+        "iconPath": "images/recommend.png",
+        "selectedIconPath": "images/recommend_active.png"
+      }
+    ]
+  }
+}

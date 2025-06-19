@@ -1,0 +1,7 @@
+<view class="recommend-container">
+  <view class="recommend-item" wx:for="{{recommendList}}" wx:key="id">
+    <image src="{{item.image}}" mode="widthFix"></image>
+    <text>{{item.title}}</text>
+    <text>{{item.description}}</text>
+  </view>
+</view>

@@ -1,0 +1,58 @@
+.index-container {
+  position: relative;
+  padding-top: 120rpx; /* 预留水球空间 */
+  background: linear-gradient(135deg, #FFE4E1 25%, #FFF5EB 100%); /* 温暖渐变背景 */
+}
+
+.healing-days {
+  position: fixed;
+  top: 40rpx;
+  right: 40rpx;
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+  background: radial-gradient(circle at 60% 30%, #FFB6C1 20%, #FFE4B5 100%); /* 水球渐变 */
+  box-shadow: 0 4rpx 12rpx rgba(255, 182, 193, 0.3); /* 投影增加立体感 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+#waterBall {
+  position: absolute;
+  width: 160rpx;
+  height: 160rpx;
+}
+
+.days-number {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #FFFFFF;
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
+  z-index: 101;
+}
+
+.developer-message {
+  padding: 0 40rpx;
+  margin-bottom: 60rpx;
+}
+
+.message-title {
+  font-size: 32rpx;
+  color: #FF6B6B;
+  margin-bottom: 20rpx;
+  text-align: center;
+  display: block;
+}
+
+.message-content {
+  font-size: 28rpx;
+  line-height: 42rpx;
+  color: #666;
+  text-align: justify;
+}
+
+.function-buttons {
+  padding: 0 40rpx;
+}

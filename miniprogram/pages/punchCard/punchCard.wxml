@@ -1,0 +1,11 @@
+<view class="punchCard-container">
+  <view class="punch-item" wx:for="{{punchList}}" wx:key="id">
+    <text>{{item.name}}</text>
+    <checkbox checked="{{item.checked}}" bindchange="handleCheckboxChange" data-id="{{item.id}}"></checkbox>
+  </view>
+  <button bindtap="submitPunch">提交打卡</button>
+  <view class="reward" wx:if="{{showReward}}">
+    <text>恭喜获得：{{rewardName}}</text>
+    <image src="{{rewardIcon}}" mode="widthFix"></image>
+  </view>
+</view>

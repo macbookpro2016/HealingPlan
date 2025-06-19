@@ -1,0 +1,12 @@
+<view class="diary-container">
+  <textarea placeholder="记录你的心情" bindinput="handleDiaryInput"></textarea>
+  <view class="input-buttons">
+    <button bindtap="recordVoice">语音录入</button>
+    <button bindtap="chooseImage">上传图片</button>
+  </view>
+  <view class="emotion-analysis" wx:if="{{emotionResult}}">
+    <text>情感分析结果：{{emotionResult}}</text>
+    <text>建议：{{suggestion}}</text>
+  </view>
+  <button bindtap="saveDiary">保存日记</button>
+</view>

@@ -1,0 +1,19 @@
+<view class="community-container">
+  <view class="tab-bar">
+    <view class="tab-item" wx:for="{{communityTabs}}" wx:key="id" bindtap="switchTab" data-index="{{index}}" class="{{activeIndex === index? 'active' : ''}}">
+      {{item.name}}
+    </view>
+  </view>
+  <view class="content" wx:for="{{communityContents}}" wx:key="id" wx:if="{{activeIndex === index}}">
+    <view class="post">
+      <text>{{post.title}}</text>
+      <text>{{post.content}}</text>
+      <view class="interact">
+        <icon type="like" size="20" bindtap="likePost"></icon>
+        <text>{{post.likeCount}}</text>
+        <icon type="comment" size="20" bindtap="commentPost"></icon>
+        <text>{{post.commentCount}}</text>
+      </view>
+    </view>
+  </view>
+</view>
