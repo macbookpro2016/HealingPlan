@@ -1,58 +1,210 @@
-.index-container {
+.container {
+  background-color: #f8f9fa;
+  padding: 30rpx;
   position: relative;
-  padding-top: 120rpx; /* 预留水球空间 */
-  background: linear-gradient(135deg, #FFE4E1 25%, #FFF5EB 100%); /* 温暖渐变背景 */
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
 }
 
-.healing-days {
-  position: fixed;
-  top: 40rpx;
-  right: 40rpx;
-  width: 160rpx;
-  height: 160rpx;
+/* 顶部区域 */
+.top-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 40rpx;
+  padding-left: 20rpx;  /* 与开发者寄语左侧对齐 */
+}
+
+/* 温馨提示文本 */
+.comfort-text {
+  font-size: 38rpx;
+  color: #666;
+  max-width: 500rpx;
+  line-height: 1.4;
+}
+
+/* 右上角小太阳 */
+.sun-container {
+  z-index: 10;
+}
+
+.sun-shape {
+  width: 140rpx;
+  height: 140rpx;
   border-radius: 50%;
-  background: radial-gradient(circle at 60% 30%, #FFB6C1 20%, #FFE4B5 100%); /* 水球渐变 */
-  box-shadow: 0 4rpx 12rpx rgba(255, 182, 193, 0.3); /* 投影增加立体感 */
+  background: radial-gradient(circle, #fff8e1 0%, #ffd54f 100%);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 100;
+  box-shadow: 0 0 30rpx rgba(255, 215, 0, 0.6);
+  animation: glow 3s infinite ease-in-out;
 }
 
-#waterBall {
-  position: absolute;
-  width: 160rpx;
-  height: 160rpx;
-}
-
-.days-number {
-  font-size: 48rpx;
+.sun-text {
+  font-size: 56rpx;
+  color: #e65100;
   font-weight: bold;
-  color: #FFFFFF;
   text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
-  z-index: 101;
 }
 
-.developer-message {
-  padding: 0 40rpx;
-  margin-bottom: 60rpx;
+/* 发光动画 */
+@keyframes glow {
+  0% { box-shadow: 0 0 20rpx rgba(255, 215, 0, 0.6); }
+  50% { box-shadow: 0 0 40rpx rgba(255, 215, 0, 0.9); }
+  100% { box-shadow: 0 0 20rpx rgba(255, 215, 0, 0.6); }
 }
 
-.message-title {
-  font-size: 32rpx;
-  color: #FF6B6B;
-  margin-bottom: 20rpx;
-  text-align: center;
+/* 开发者寄语区域 */
+.dev-msg-section {
+  margin-bottom: 40rpx;
+  background-color: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.dev-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  padding-bottom: 10rpx;  /* 增加点击区域 */
+}
+
+.dev-title {
+  font-size: 36rpx;
+  color: #333;
+  font-weight: bold;
+  position: relative;
+  padding-left: 20rpx;
+}
+
+.dev-title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8rpx;
+  height: 36rpx;
+  background-color: #ff9800;
+  border-radius: 4rpx;
+}
+
+.expand-icon {
+  width: 24rpx;
+  height: 24rpx;
+  transition: transform 0.3s ease;
+}
+
+.dev-content {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.5s ease;
+  padding-top: 10rpx;  /* 增加内容与标题的间距 */
+}
+
+.expanded .dev-content {
+  max-height: 1000rpx;
+}
+
+.expanded .expand-icon {
+  transform: rotate(180deg);
+}
+
+.dev-content text {
   display: block;
-}
-
-.message-content {
   font-size: 28rpx;
-  line-height: 42rpx;
-  color: #666;
-  text-align: justify;
+  color: #555;
+  line-height: 1.8;
+  letter-spacing: 1rpx;
+  margin-top: 10rpx;
 }
 
-.function-buttons {
-  padding: 0 40rpx;
+/* 记录区域 */
+.record-section {
+  background-color: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.record-title {
+  font-size: 36rpx;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+  position: relative;
+  padding-left: 20rpx;
+}
+
+.record-title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8rpx;
+  height: 36rpx;
+  background-color: #4caf50;
+  border-radius: 4rpx;
+}
+
+.record-list {
+  margin-top: 20rpx;
+}
+
+.record-item {
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+  position: relative;
+  padding-left: 30rpx;
+}
+
+.record-item:last-child {
+  border-bottom: none;
+}
+
+.check-in-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6rpx;
+  height: 40rpx;
+  background-color: #4caf50;
+  border-radius: 3rpx;
+}
+
+.diary-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6rpx;
+  height: 40rpx;
+  background-color: #2196f3;
+  border-radius: 3rpx;
+}
+
+.record-date {
+  font-size: 24rpx;
+  color: #999;
+  margin-bottom: 8rpx;
+}
+
+.record-content {
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.6;
+}
+
+.empty-tip {
+  margin-top: 20rpx;
+  padding: 20rpx 0;
+  font-size: 26rpx;
+  color: #999;
+  text-align: center;
 }
