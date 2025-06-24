@@ -37,7 +37,8 @@
   justify-content: center;
   align-items: center;
   box-shadow: 0 0 30rpx rgba(255, 215, 0, 0.6);
-  animation: glow 3s infinite ease-in-out;
+  /* 将动画时长调整为4秒，符合正常呼吸节奏 */
+  animation: glow 4s infinite cubic-bezier(0.45, 0.05, 0.55, 0.95); 
 }
 
 .sun-text {
@@ -47,11 +48,28 @@
   text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
 }
 
-/* 发光动画 */
+/* 发光动画，进一步优化关键帧以模拟正常呼吸节奏 */
 @keyframes glow {
-  0% { box-shadow: 0 0 20rpx rgba(255, 215, 0, 0.6); }
-  50% { box-shadow: 0 0 40rpx rgba(255, 215, 0, 0.9); }
-  100% { box-shadow: 0 0 20rpx rgba(255, 215, 0, 0.6); }
+  0% { 
+    box-shadow: 0 0 20rpx rgba(255, 215, 0, 0.6); 
+    transform: scale(1);
+  }
+  25% { 
+    box-shadow: 0 0 40rpx rgba(255, 215, 0, 0.9); 
+    transform: scale(1.05);
+  }
+  50% { 
+    box-shadow: 0 0 30rpx rgba(255, 215, 0, 0.8); 
+    transform: scale(1.02);
+  }
+  75% { 
+    box-shadow: 0 0 20rpx rgba(255, 215, 0, 0.7); 
+    transform: scale(1.01);
+  }
+  100% { 
+    box-shadow: 0 0 20rpx rgba(255, 215, 0, 0.6); 
+    transform: scale(1);
+  }
 }
 
 /* 开发者寄语区域 */
