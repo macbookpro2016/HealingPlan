@@ -1,8 +1,27 @@
 <view class="punchCard-container">
-  <view class="punch-item" wx:for="{{punchList}}" wx:key="id">
-    <text>{{item.name}}</text>
-    <checkbox checked="{{item.checked}}" bindchange="handleCheckboxChange" data-id="{{item.id}}"></checkbox>
+  <!-- 创建打卡项输入框和按钮 -->
+  <view class="create-punch">
+    <input placeholder="输入打卡项内容" bindinput="handleInputChange" value="{{newPunchName}}"/>
+    <button bindtap="createPunch">创建打卡</button>
   </view>
+
+  <!-- 快速创建建议项 -->
+  <view class="suggestion-list">
+    <view class="suggestion-item" wx:for="{{suggestionList}}" wx:key="*this" bindtap="quickCreatePunch">{{item}}</view>
+  </view>
+
+  <!-- 打卡项列表 -->
+  <view class="punch-list">
+    <view class="punch-item" wx:for="{{punchList}}" wx:key="id">
+      <view class="punch-content" style="transform: translateX({{item.slideOffset}}px)">
+        <text>{{item.name}}</text>
+        <text class="checked-times">{{item.checkedTimes}}次</text>
+        <button bindtap="addCheckTime" data-index="{{index}}" disabled="{{item.isClicking}}">+1</button>
+      </view>
+      <view class="delete-btn" bindtap="deletePunch" data-index="{{index}}">删除</view>
+    </view>
+  </view>
+
   <button bindtap="submitPunch">提交打卡</button>
   <view class="reward" wx:if="{{showReward}}">
     <text>恭喜获得：{{rewardName}}</text>
