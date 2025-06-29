@@ -1,23 +1,75 @@
-.diary-container {
-  padding: 20rpx;
-}
-textarea {
-  width: 100%;
-  height: 300rpx;
-  border: 1px solid #ccc;
-  border-radius: 10rpx;
-  padding: 10rpx;
-  margin-bottom: 20rpx;
-}
-.input-buttons {
+/* miniprogram/pages/diaryEdit/diaryEdit.wxss */
+.container {
+  height: 100vh;
   display: flex;
-  justify-content: space-around;
-  margin-bottom: 20rpx;
+  flex-direction: column;
+  background-color: #f8f9fa;
 }
-.emotion-analysis {
-  margin-top: 10rpx;
-  padding: 10rpx;
-  border: 1px solid #ccc;
+
+/* 编辑器容器 */
+.editor-container {
+  flex: 1;
+  background-color: #fff;
+  padding: 20rpx 30rpx;
+  margin: 15rpx 30rpx;
+  border-radius: 16rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+/* 编辑器工具栏 */
+.editor-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.toolbar-item {
+  width: 55rpx;
+  height: 55rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5rpx;
   border-radius: 10rpx;
-  background-color: #f9f9f9;
+  font-size: 34rpx;
+  color: #666;
+}
+
+.toolbar-item:active {
+  background-color: #f0f0f0;
+}
+
+/* 底部保存按钮 */
+.save-button {
+  height: 90rpx;
+  line-height: 90rpx;
+  text-align: center;
+  background-color: #4caf50;
+  color: #fff;
+  font-size: 34rpx;
+  margin: 30rpx;
+  border-radius: 16rpx;
+  box-shadow: 0 4rpx 10rpx rgba(76, 175, 80, 0.3);
+}
+
+.save-button:active {
+  background-color: #43a047;
+}
+
+/* 提示框 */
+.toast-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+}
+
+.toast-message {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 20rpx 40rpx;
+  border-radius: 10rpx;
+  font-size: 30rpx;
 }

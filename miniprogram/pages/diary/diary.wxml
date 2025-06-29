@@ -1,12 +1,58 @@
-<view class="diary-container">
-  <textarea placeholder="记录你的心情" bindinput="handleDiaryInput"></textarea>
-  <view class="input-buttons">
-    <button bindtap="recordVoice">语音录入</button>
-    <button bindtap="chooseImage">上传图片</button>
+<!-- miniprogram/pages/diaryEdit/diaryEdit.wxml -->
+<view class="container">
+  <!-- 富文本编辑器 -->
+  <editor 
+    id="editor" 
+    class="editor-container" 
+    placeholder="今天有什么想记录的？"
+    bindready="onEditorReady" 
+    bindinput="onEditorInput"
+  >
+    <!-- 编辑器工具栏 -->
+    <view slot="toolbar" class="editor-toolbar">
+      <view class="toolbar-item" bindtap="formatText" data-name="bold">
+        <text class="iconfont icon-bold"></text>
+      </view>
+      <view class="toolbar-item" bindtap="formatText" data-name="italic">
+        <text class="iconfont icon-italic"></text>
+      </view>
+      <view class="toolbar-item" bindtap="formatText" data-name="underline">
+        <text class="iconfont icon-underline"></text>
+      </view>
+      <view class="toolbar-item" bindtap="formatText" data-name="strikethrough">
+        <text class="iconfont icon-strikethrough"></text>
+      </view>
+      <view class="toolbar-item" bindtap="formatText" data-name="heading" data-value="2">
+        <text class="iconfont icon-h2"></text>
+      </view>
+      <view class="toolbar-item" bindtap="formatText" data-name="heading" data-value="3">
+        <text class="iconfont icon-h3"></text>
+      </view>
+      <view class="toolbar-item" bindtap="insertImage">
+        <text class="iconfont icon-image"></text>
+      </view>
+      <view class="toolbar-item" bindtap="formatText" data-name="list" data-value="ordered">
+        <text class="iconfont icon-list-ordered"></text>
+      </view>
+      <view class="toolbar-item" bindtap="formatText" data-name="list" data-value="unordered">
+        <text class="iconfont icon-list-unordered"></text>
+      </view>
+      <view class="toolbar-item" bindtap="formatText" data-name="indent">
+        <text class="iconfont icon-indent"></text>
+      </view>
+      <view class="toolbar-item" bindtap="formatText" data-name="outdent">
+        <text class="iconfont icon-outdent"></text>
+      </view>
+    </view>
+  </editor>
+
+  <!-- 底部保存按钮 -->
+  <view class="save-button" bindtap="saveDiary">
+    <text>保存</text>
   </view>
-  <view class="emotion-analysis" wx:if="{{emotionResult}}">
-    <text>情感分析结果：{{emotionResult}}</text>
-    <text>建议：{{suggestion}}</text>
+
+  <!-- 成功提示 -->
+  <view class="toast-container" wx:if="{{showToast}}">
+    <view class="toast-message">{{toastMessage}}</view>
   </view>
-  <button bindtap="saveDiary">保存日记</button>
 </view>
