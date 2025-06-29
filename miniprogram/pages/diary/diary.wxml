@@ -50,6 +50,12 @@
   <view class="save-button" bindtap="saveDiary">
     <text>保存</text>
   </view>
+  <!-- 输出框区域 - 下半屏 -->
+  <view class="output-container">
+    <view class="output-header">分析结果</view>
+    <view class="output-content">{{analysisResult}}</view>
+    <!-- <view class="output-content">123133212</view> -->
+  </view>
 
   <!-- 成功提示 -->
   <view class="toast-container" wx:if="{{showToast}}">
