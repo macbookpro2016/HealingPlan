@@ -1,28 +1,137 @@
-.community-container {
-  padding: 20rpx;
-}
-.tab-bar {
+.container {
   display: flex;
-  justify-content: space-around;
-  margin-bottom: 20rpx;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f5f5f5;
 }
-.tab-item {
-  padding: 10rpx;
-  border-bottom: 2px solid transparent;
-}
-.active {
-  color: #FF6B6B;
-  border-bottom-color: #FF6B6B;
-}
-.post {
-  margin-bottom: 20rpx;
-  padding: 10rpx;
-  border: 1px solid #ccc;
-  border-radius: 10rpx;
-  background-color: #ffffff;
-}
-.interact {
+
+/* 顶部标题栏样式 */
+.header {
+  height: 44px;
   display: flex;
-  justify-content: space-around;
-  margin-top: 10rpx;
+  align-items: center;
+  justify-content: center;
+  background-color: #007aff;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* 对话区域样式 */
+.chat-container {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+}
+
+.message-container {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: flex-end;
+}
+
+/* 用户消息样式 */
+.user-message {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  max-width: 70%;
+  margin-left: auto;
+}
+
+.user-message .bubble {
+  background-color: #007aff;
+  color: white;
+  border-radius: 18px 18px 0 18px;
+  padding: 10px 15px;
+  position: relative;
+  word-break: break-word;
+}
+
+/* AI消息样式 */
+.ai-message {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 70%;
+  margin-right: auto;
+}
+
+.ai-message .ai-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.ai-message .bubble {
+  background-color: #e9e9eb;
+  color: #333;
+  border-radius: 18px 18px 18px 0;
+  padding: 10px 15px;
+  position: relative;
+  word-break: break-word;
+}
+
+/* 时间戳样式 */
+.time {
+  font-size: 12px;
+  color: #999;
+  margin-top: 5px;
+}
+
+/* 底部输入区域样式 */
+.input-container {
+  display: flex;
+  align-items: center;
+  padding: 8px 15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #e5e5e5;
+}
+
+.input {
+  flex: 1;
+  height: 40px;
+  background-color: white;
+  border-radius: 20px;
+  padding: 0 15px;
+  font-size: 16px;
+  border: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.send-btn {
+  width: 60px;
+  height: 40px;
+  line-height: 40px;
+  padding: 0;
+  margin-left: 10px;
+  background-color: #007aff;
+  color: white;
+  border-radius: 20px;
+  font-size: 16px;
+  box-shadow: none;
+}
+
+.send-btn::after {
+  border: none;
+}
+/* 其他样式保持不变... */
+
+/* 新增加载状态样式 */
+.loading-container {
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 40px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+.loading-indicator {
+  background-color: #e9e9eb;
+  color: #333;
+  border-radius: 18px;
+  padding: 8px 15px;
+  font-size: 14px;
 }

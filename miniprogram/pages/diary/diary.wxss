@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: column;
   background-color: #f8f9fa;
+  overflow-x: hidden;
 }
 
 /* 编辑器容器 */
@@ -23,6 +24,7 @@
   flex-wrap: wrap;
   padding: 10rpx 0;
   border-bottom: 1rpx solid #f0f0f0;
+  overflow-x: hidden;
 }
 
 .toolbar-item {
@@ -54,6 +56,24 @@
   box-shadow: 0 4rpx 10rpx rgba(76, 175, 80, 0.3);
 }
 
+.button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; /* 按钮间距平均分布，可按需更换其他值 */
+}
+button {
+  border-radius: 4px; /* 设置按钮边框圆角，可自定义 */
+  color: green;
+  outline: 0;
+}
+button::after{
+  border: none;
+}
+
+
+
+
+
 .save-button:active {
   background-color: #43a047;
 }
@@ -83,6 +103,7 @@
   border-radius: 16rpx;
   box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .output-header {

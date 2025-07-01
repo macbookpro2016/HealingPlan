@@ -1,19 +1,44 @@
-<view class="community-container">
-  <view class="tab-bar">
-    <view class="tab-item" wx:for="{{communityTabs}}" wx:key="id" bindtap="switchTab" data-index="{{index}}" class="{{activeIndex === index? 'active' : ''}}">
-      {{item.name}}
-    </view>
+<view class="container">
+  <!-- 顶部标题栏 -->
+  <view class="header">
+    <text class="title">AI对话助手</text>
   </view>
-  <view class="content" wx:for="{{communityContents}}" wx:key="id" wx:if="{{activeIndex === index}}">
-    <view class="post">
-      <text>{{post.title}}</text>
-      <text>{{post.content}}</text>
-      <view class="interact">
-        <icon type="like" size="20" bindtap="likePost"></icon>
-        <text>{{post.likeCount}}</text>
-        <icon type="comment" size="20" bindtap="commentPost"></icon>
-        <text>{{post.commentCount}}</text>
+  
+  <!-- 消息对话区域 -->
+  <view class="chat-container" scroll-y="true" scroll-top="{{scrollTop}}">
+    <block wx:for="{{messages}}" wx:key="id">
+      <!-- 用户消息 -->
+      <view class="message-container" wx:if="{{item.isUser}}">
+        <view class="user-message bubble">
+          <text>{{item.content}}</text>
+          <text class="time">{{item.time}}</text>
+        </view>
       </view>
-    </view>
+      
+      <!-- AI消息 -->
+      <view class="message-container" wx:else>
+        <view class="ai-message bubble">
+          <image class="ai-avatar" src="/images/ai-avatar.png" mode="aspectFit"></image>
+          <text>{{item.content}}</text>
+          <text class="time">{{item.time}}</text>
+        </view>
+      </view>
+      
+      <!-- 加载状态 -->
+      <view class="loading-container" wx:if="{{loading && !item.isUser && item.id === lastMessageId}}">
+        <view class="loading-indicator">
+          <text>AI正在思考中...</text>
+        </view>
+      </view>
+    </block>
+  </view>
+  
+  <!-- 底部输入区域 -->
+  <view class="input-container">
+    <input class="input" placeholder="输入消息..." value="{{inputValue}}" bindinput="onInput" 
+           confirm-type="send" bindconfirm="sendMessage" disabled="{{loading}}" />
+    <button class="send-btn" bindtap="sendMessage" disabled="{{loading || !inputValue.trim()}}">
+      {{loading ? '思考中...' : '发送'}}
+    </button>
   </view>
 </view>

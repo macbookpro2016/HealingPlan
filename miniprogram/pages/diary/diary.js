@@ -127,23 +127,50 @@ Page({
     
     // 模拟保存到后端
     setTimeout(() => {
-      const saveData = {
-        content: content,
-      };
-      
-      // 实际项目中应替换为真实API调用
-      
-      this.setData({
-        isSaving: false
+      wx.request({
+        // url: 'http://www.catwithpig.fun:8080/api/homeData', // 替换为实际的服务器地址
+        url: 'http://localhost:8080/api/saveDiary', // 替换为实际的服务器地址
+        method: 'POST',
+        data: {
+          "type" : 1,
+          "content" : content
+        },
+        success: (res) => {
+          if (res.statusCode === 200) {
+            const data = res.data;
+            this.setData({
+              analysisResult: data.analyse,
+              isSaving: false
+            });
+            wx.hideLoading();
+            this.showToast('保存成功');
+            setTimeout(() => {
+              wx.navigateBack();
+            }, 1000);
+          } else {
+            console.error('请求失败，状态码：', res.statusCode);
+          }
+        },
+        fail: (err) => {
+          console.error('请求出错：', err);
+        }
       });
-      
-      wx.hideLoading();
-      this.showToast('保存成功');
-      
-      setTimeout(() => {
-        wx.navigateBack();
-      }, 1000);
     }, 1500);
+  },
+
+  reset() {
+    this.setData({
+      analysisResult: '',
+      isSaving: false,
+    });
+    wx.createSelectorQuery().select('#editor').context((res) => {
+      const editorCtx = res.context;
+      editorCtx.clear({
+        success: () => {
+          console.log('富文本编辑器内容已重置');
+        }
+      });
+    }).exec();
   },
 
   showToast(message) {
@@ -166,3 +193,4 @@ Page({
     });
   }
 });
+

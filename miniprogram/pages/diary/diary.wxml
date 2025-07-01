@@ -47,9 +47,14 @@
   </editor>
 
   <!-- 底部保存按钮 -->
-  <view class="save-button" bindtap="saveDiary">
+  <!-- <view class="save-button" bindtap="saveDiary">
     <text>保存</text>
+  </view> -->
+  <view class="button-container">
+    <button bind:tap="saveDiary">保存</button>
+    <button bind:tap="reset">重置</button>
   </view>
+
   <!-- 输出框区域 - 下半屏 -->
   <view class="output-container">
     <view class="output-header">分析结果</view>
