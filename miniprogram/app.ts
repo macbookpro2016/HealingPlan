@@ -7,6 +7,7 @@ interface IAppOption {
     uuid?: string;                      // 开放平台统一标识（需绑定）
     isLoggedIn: boolean;                   // 登录状态
   };
+  loginPromise: Promise<void>; // 新增一个 Promise 用于等待登录完成
 }
 
 App<IAppOption>({
@@ -15,12 +16,14 @@ App<IAppOption>({
     openId: undefined,
     sessionKey: undefined,
     uuid: undefined,
-    isLoggedIn: false
+    isLoggedIn: false,
+    userId: undefined
   },
-  
+  loginPromise: Promise.resolve(), // 初始化 Promise
+
   async onLaunch() {
     // 小程序初始化时执行登录流程
-    await this.login();
+    this.loginPromise = this.login();
   },
   
   // 登录方法
@@ -31,60 +34,71 @@ App<IAppOption>({
           console.log(res)
           if (res.code) {
             // 将 code 发送到后端换取 openId、sessionKey、unionId
-            this.getOpenIdFromServer(res.code);
+            this.getOpenIdFromServer(res.code).then(() => {
+              resolve();
+            }).catch((err) => {
+              reject(err);
+            });
           } else {
             console.error('登录失败，获取 code 失败:', res.errMsg);
             wx.showToast({
               title: '登录失败，请重试',
               icon: 'none'
             });
+            reject(new Error('登录失败，获取 code 失败'));
           }
         },
         fail: (err) => {
           console.error('登录 API 调用失败:', err);
-        }
-      });
-    })
-  },
-  
-  // 向后端发送 code 获取身份信息
-  getOpenIdFromServer(code: string) {
-    wx.request({
-      url: 'http://www.localhost:8080/wx/getUserInfo', // 替换为你的后端登录接口
-      method: 'POST',
-      data: {
-        code: code
-      },
-      success: (res) => {
-        console.log(res)
-        const data = res.data;
-        console.log("data")
-        console.log(data.success)
-        console.log(data.data)
-        if (data.data) {
-          // 保存后端返回的身份信息到全局变量
-          this.globalData.uuid = data.uuid;
-          this.globalData.isLoggedIn = true;
-          
-          console.log('登录成功，openId:', this.globalData.openId);
-          
-          // 登录成功后可以继续获取用户信息（如果已授权）
-          this.getUserInfo();
-        } else {
-          console.error('获取身份信息失败:', data.message);
           wx.showToast({
             title: '登录失败，请重试',
             icon: 'none'
           });
+          reject(err);
         }
-      },
-      fail: (err) => {
-        console.error('请求后端登录接口失败:', err);
-        wx.showToast({
-          title: '网络错误，请重试',
-          icon: 'none'
-        });
-      }
+      });
+    });
+  },
+  
+  // 向后端发送 code 获取身份信息
+  getOpenIdFromServer(code: string) {
+    return new Promise((resolve, reject) => {
+      wx.request({
+        url: 'http://www.localhost:8080/wx/getUserInfo', // 替换为你的后端登录接口
+        method: 'POST',
+        data: {
+          code: code
+        },
+        success: (res) => {
+          console.log(res)
+          const data = res.data;
+          if (data.data) {
+            // 保存后端返回的身份信息到全局变量
+            this.globalData.uuid = data.data.uuid;
+            this.globalData.userId = data.data.id;
+            this.globalData.isLoggedIn = true;
+            console.log('uuid:', this.globalData.uuid);
+            // 登录成功后可以继续获取用户信息（如果已授权）
+            this.getUserInfo();
+            resolve();
+          } else {
+            console.error('获取身份信息失败:', data.message);
+            wx.showToast({
+              title: '登录失败，请重试',
+              icon: 'none'
+            });
+            reject(new Error('获取身份信息失败'));
+          }
+        },
+        fail: (err) => {
+          console.error('请求后端登录接口失败:', err);
+          wx.showToast({
+            title: '网络错误，请重试',
+            icon: 'none'
+          });
+          reject(err);
+        }
+      });
     });
   },
   

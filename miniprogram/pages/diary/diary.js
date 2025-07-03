@@ -1,4 +1,5 @@
 // miniprogram/pages/diaryEdit/diaryEdit.js
+const app = getApp();
 Page({
   data: {
     editorContent: '',
@@ -134,6 +135,10 @@ Page({
         data: {
           "type" : 1,
           "content" : content
+        },
+        header:{
+          "userId":app.globalData.userId,
+          "uuid":app.globalData.uuid
         },
         success: (res) => {
           if (res.statusCode === 200) {

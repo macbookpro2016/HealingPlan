@@ -7,10 +7,18 @@ Page({
   },
 
   onLoad(options) {
-    // 调用获取首页数据的方法
+    // 等待登录完成后再获取首页数据
+    app.loginPromise.then(() => {
+      this.fetchHomeData();
+      console.log("onload")
+      console.log(app.globalData.uuid)
+    }).catch((err) => {
+      console.error('登录失败:', err);
+    });
+  },
+
+  onShow() {
     this.fetchHomeData();
-    console.log("onload")
-    console.log(app.globalData.uuid)
   },
 
   /**
@@ -23,7 +31,11 @@ Page({
       url: 'http://localhost:8080/api/homeData', // 替换为实际的服务器地址
       method: 'GET',
       data: {
-        uid:1
+        // uid: app.globalData.uuid // 使用获取到的 uuid
+      },
+      header:{
+        "userId":app.globalData.userId,
+        "uuid":app.globalData.uuid
       },
       success: (res) => {
         if (res.statusCode === 200) {
