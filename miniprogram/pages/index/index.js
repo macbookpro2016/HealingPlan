@@ -1,3 +1,4 @@
+const app = getApp();
 Page({
   data: {
     healingDays: 0,        // 治愈天数
@@ -8,6 +9,8 @@ Page({
   onLoad(options) {
     // 调用获取首页数据的方法
     this.fetchHomeData();
+    console.log("onload")
+    console.log(app.globalData.uuid)
   },
 
   /**

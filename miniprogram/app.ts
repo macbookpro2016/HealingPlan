@@ -4,7 +4,7 @@ interface IAppOption {
     userInfo?: WechatMiniprogram.UserInfo; // 用户基本信息（头像、昵称）
     openId?: string;                       // 用户唯一标识
     sessionKey?: string;                   // 会话密钥
-    unionId?: string;                      // 开放平台统一标识（需绑定）
+    uuid?: string;                      // 开放平台统一标识（需绑定）
     isLoggedIn: boolean;                   // 登录状态
   };
 }
@@ -14,35 +14,37 @@ App<IAppOption>({
     userInfo: undefined,
     openId: undefined,
     sessionKey: undefined,
-    unionId: undefined,
+    uuid: undefined,
     isLoggedIn: false
   },
   
-  onLaunch() {
+  async onLaunch() {
     // 小程序初始化时执行登录流程
-    this.login();
+    await this.login();
   },
   
   // 登录方法
   login() {
-    wx.login({
-      success: (res) => {
-        console.log(res)
-        if (res.code) {
-          // 将 code 发送到后端换取 openId、sessionKey、unionId
-          this.getOpenIdFromServer(res.code);
-        } else {
-          console.error('登录失败，获取 code 失败:', res.errMsg);
-          wx.showToast({
-            title: '登录失败，请重试',
-            icon: 'none'
-          });
+    return new Promise((resolve, reject) => {
+      wx.login({
+        success: (res) => {
+          console.log(res)
+          if (res.code) {
+            // 将 code 发送到后端换取 openId、sessionKey、unionId
+            this.getOpenIdFromServer(res.code);
+          } else {
+            console.error('登录失败，获取 code 失败:', res.errMsg);
+            wx.showToast({
+              title: '登录失败，请重试',
+              icon: 'none'
+            });
+          }
+        },
+        fail: (err) => {
+          console.error('登录 API 调用失败:', err);
         }
-      },
-      fail: (err) => {
-        console.error('登录 API 调用失败:', err);
-      }
-    });
+      });
+    })
   },
   
   // 向后端发送 code 获取身份信息
@@ -56,11 +58,12 @@ App<IAppOption>({
       success: (res) => {
         console.log(res)
         const data = res.data;
-        if (data.success && data.data) {
+        console.log("data")
+        console.log(data.success)
+        console.log(data.data)
+        if (data.data) {
           // 保存后端返回的身份信息到全局变量
-          this.globalData.openId = data.data.openId;
-          this.globalData.sessionKey = data.data.sessionKey;
-          this.globalData.unionId = data.data.unionId;
+          this.globalData.uuid = data.uuid;
           this.globalData.isLoggedIn = true;
           
           console.log('登录成功，openId:', this.globalData.openId);
