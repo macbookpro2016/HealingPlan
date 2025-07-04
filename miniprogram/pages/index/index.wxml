@@ -28,7 +28,7 @@
     <text class="record-title">我的治愈记录</text>
     <view class="record-list" wx:if="{{recordList.length > 0}}">
       <view class="record-item {{item.type === 'check_in' ? 'check-in-item' : 'diary-item'}}" 
-            wx:for="{{recordList}}" wx:key="id">
+            wx:for="{{recordList}}" wx:key="id" bindtap="navigateToDetail" data-id="{{item}}">
         <!-- 交换顺序，内容在前，日期在后 -->
         <text class="record-content">{{item.content}}</text>
         <text class="record-date">{{item.date}}</text>

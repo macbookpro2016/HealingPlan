@@ -1,0 +1,17 @@
+<view class="container">
+  <!-- 返回按钮 -->
+  <!-- <view class="back-button" bindtap="navigateBack">
+    <image src="/images/back.png" mode="aspectFit"></image>
+  </view> -->
+
+  <!-- 记录详情内容 -->
+  <view class="detail-content-wrapper">
+    <view class="detail-content">
+      <!-- 使用rich-text组件展示富文本 -->
+      <rich-text nodes="{{record.content}}"></rich-text>
+    </view>
+    <view class="date-wrapper">
+      <text class="detail-date">{{record.date}}</text>
+    </view>
+  </view>
+</view>

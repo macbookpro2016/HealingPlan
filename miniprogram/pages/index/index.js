@@ -40,6 +40,7 @@ Page({
       success: (res) => {
         if (res.statusCode === 200) {
           const data = res.data;
+          console.log(data.recordList)
           this.setData({
             healingDays: data.healingDays,
             recordList: data.recordList
@@ -81,6 +82,18 @@ Page({
   onAddRecord() {
     wx.navigateTo({
       url: '/pages/addRecord/addRecord'
+    });
+  },
+
+  /**
+   * 点击记录项跳转到详情页
+   */
+  navigateToDetail(e) {
+    // console.log(e)
+    const record = e.currentTarget.dataset.id;
+    // console.log(record)
+    wx.navigateTo({
+      url: `/pages/recordDetail/recordDetail?id=${record.id}&date=${record.date}&content=${record.originContent}`
     });
   }
 });
